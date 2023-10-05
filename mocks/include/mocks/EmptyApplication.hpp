@@ -74,6 +74,11 @@ public:
         return nullptr;
     }
 
+    FfzBadges *getBttvBadges() override
+    {
+        return nullptr;
+    }
+
     IUserDataController *getUserData() override
     {
         return nullptr;

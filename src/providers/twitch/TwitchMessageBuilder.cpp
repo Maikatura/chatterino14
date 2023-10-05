@@ -15,6 +15,7 @@
 #include "providers/chatterino/ChatterinoBadges.hpp"
 #include "providers/colors/ColorProvider.hpp"
 #include "providers/ffz/FfzBadges.hpp"
+#include "providers/bttv/BttvBadges.hpp"
 #include "providers/seventv/SeventvBadges.hpp"
 #include "providers/seventv/SeventvPersonalEmotes.hpp"
 #include "providers/twitch/api/Helix.hpp"
@@ -284,6 +285,7 @@ MessagePtr TwitchMessageBuilder::build()
     this->appendChatterinoBadges();
     this->appendFfzBadges();
     this->appendSeventvBadges();
+    this->appendBttvBadges();
 
     this->appendUsername();
 
@@ -1325,6 +1327,16 @@ void TwitchMessageBuilder::appendChatterinoBadges()
     {
         this->emplace<BadgeElement>(*badge,
                                     MessageElementFlag::BadgeChatterino);
+    }
+}
+
+void TwitchMessageBuilder::appendBttvBadges()
+{
+    for (const auto &badge :
+         getApp()->bttvBadges->getUserBadges({this->userId_}))
+    {
+        this->emplace<BttvBadgeElement>(
+            badge.emote, MessageElementFlag::BadgeFfz, badge.color);
     }
 }
 

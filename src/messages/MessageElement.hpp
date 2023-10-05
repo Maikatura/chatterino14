@@ -112,9 +112,11 @@ enum class MessageElementFlag : int64_t {
     // - FFZ donator badge
     BadgeFfz = (1LL << 19),
 
+    BadgeBttv = (1LL << 37),
+
     Badges = BadgeGlobalAuthority | BadgePredictions | BadgeChannelAuthority |
              BadgeSubscription | BadgeVanity | BadgeChatterino | BadgeSevenTV |
-             BadgeFfz,
+             BadgeFfz | BadgeBttv,
 
     ChannelName = (1LL << 20),
 
@@ -442,6 +444,20 @@ class FfzBadgeElement : public BadgeElement
 {
 public:
     FfzBadgeElement(const EmotePtr &data, MessageElementFlags flags_,
+                    QColor color_);
+
+    std::unique_ptr<MessageElement> clone() const override;
+
+protected:
+    MessageLayoutElement *makeImageLayoutElement(const ImagePtr &image,
+                                                 const QSize &size) override;
+    const QColor color;
+};
+
+class BttvBadgeElement : public BadgeElement
+{
+public:
+    BttvBadgeElement(const EmotePtr &data, MessageElementFlags flags_,
                     QColor color_);
 
     std::unique_ptr<MessageElement> clone() const override;
