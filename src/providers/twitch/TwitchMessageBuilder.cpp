@@ -1336,7 +1336,7 @@ void TwitchMessageBuilder::appendBttvBadges()
          getApp()->bttvBadges->getUserBadges({this->userId_}))
     {
         this->emplace<BttvBadgeElement>(
-            badge.emote, MessageElementFlag::BadgeFfz, badge.color);
+            badge.emote, MessageElementFlag::BadgeBttv, badge.color);
     }
 }
 
